@@ -22,7 +22,9 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/users/login", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get API base URL
+      const response = await fetch(`${apiUrl}/users/login`, {
+        // const response = await fetch("http://localhost:3000/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

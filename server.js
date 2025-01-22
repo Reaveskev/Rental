@@ -2,7 +2,6 @@
 const express = require("express");
 const { Client } = require("pg");
 const cors = require("cors");
-const axios = require("axios");
 const bodyParser = require("body-parser");
 
 // Initialize the Express app
