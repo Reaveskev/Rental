@@ -23,7 +23,7 @@ const Properties = () => {
       try {
         const landlordId = user?.id || sessionStorage.getItem("userId");
         const response = await fetch(
-          `http://localhost:3000/landlord_properties/${landlordId}`,
+          `${apiUrl}/landlord_properties/${landlordId}`,
           {
             method: "GET",
             headers: {
@@ -63,16 +63,19 @@ const Properties = () => {
 
   const saveProperty = async (updatedProperty) => {
     try {
-      const response = await fetch(`/api/properties/${currentProperty.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            user?.token || sessionStorage.getItem("token")
-          }`,
-        },
-        body: JSON.stringify(updatedProperty),
-      });
+      const response = await fetch(
+        `${apiUrl}/api/properties/${currentProperty.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${
+              user?.token || sessionStorage.getItem("token")
+            }`,
+          },
+          body: JSON.stringify(updatedProperty),
+        }
+      );
       if (!response.ok) throw new Error("Failed to update property");
       const updated = await response.json();
       setProperties((prev) =>
@@ -88,7 +91,7 @@ const Properties = () => {
 
   const deleteProperty = async (propertyId) => {
     try {
-      const response = await fetch(`/api/properties/${propertyId}`, {
+      const response = await fetch(`${apiUrl}/api/properties/${propertyId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${
@@ -109,7 +112,7 @@ const Properties = () => {
   // Handle adding new property
   const addProperty = async (newProperty) => {
     try {
-      const response = await fetch(`/api/properties`, {
+      const response = await fetch(`${apiUrl}/api/properties`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

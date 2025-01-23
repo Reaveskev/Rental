@@ -20,9 +20,13 @@ const Disputes = () => {
   useEffect(() => {
     async function fetchDisputes() {
       try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get API base URL
         const response = await fetch(
-          `http://localhost:3000/api/disputes?user_id=${user.id}&role=${user.role}`,
+          `${apiUrl}/api/disputes?user_id=${user.id}&role=${user.role}`,
           {
+            // const response = await fetch(
+            //   `http://localhost:3000/api/disputes?user_id=${user.id}&role=${user.role}`,
+            // {
             headers: { Authorization: `Bearer ${user.token}` }, // Assuming token-based auth
           }
         );
@@ -33,7 +37,7 @@ const Disputes = () => {
 
         const landlordId = user?.id || sessionStorage.getItem("userId");
         const prop_response = await fetch(
-          `http://localhost:3000/landlord_properties/${landlordId}`,
+          `${apiUrl}/landlord_properties/${landlordId}`,
           {
             method: "GET",
             headers: {
@@ -84,7 +88,7 @@ const Disputes = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/disputes", {
+      const response = await fetch(`${apiUrl}/api/disputes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

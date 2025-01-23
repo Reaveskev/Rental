@@ -22,10 +22,15 @@ const Agreements = () => {
     const fetchAgreements = async () => {
       setIsLoading(true);
       setError(null);
+
       try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get API base URL
         const response = await fetch(
-          `http://localhost:3000/api/agreements?role=${user.role}&userId=${user.id}`
+          `${apiUrl}/api/agreements?role=${user.role}&userId=${user.id}`
         );
+        // const response = await fetch(
+        //   `http://localhost:3000/api/agreements?role=${user.role}&userId=${user.id}`
+        // );
         if (!response.ok) {
           throw new Error("Failed to fetch agreements");
         }

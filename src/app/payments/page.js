@@ -25,9 +25,13 @@ const Payments = () => {
     if (user) {
       const fetchPayments = async () => {
         try {
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get API base URL
           const response = await fetch(
-            `http://localhost:3000/api/payments?user_id=${user.id}&role=${user.role}`
+            `${apiUrl}/api/payments?user_id=${user.id}&role=${user.role}`
           );
+          // const response = await fetch(
+          //   `http://localhost:3000/api/payments?user_id=${user.id}&role=${user.role}`
+          // );
           const paymentData = await response.json();
           console.log(paymentData);
           setPayments(paymentData);
@@ -49,7 +53,7 @@ const Payments = () => {
     };
 
     try {
-      const response = await fetch("/api/payments", {
+      const response = await fetch(`${apiUrl}/api/payments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newPaymentObj),
