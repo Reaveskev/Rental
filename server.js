@@ -1,4 +1,5 @@
 // server.js
+require("dotenv").config();
 const express = require("express");
 const { Client } = require("pg");
 const cors = require("cors");
@@ -6,21 +7,35 @@ const bodyParser = require("body-parser");
 
 // Initialize the Express app
 const app = express();
+
 const corsOptions = {
-  origin: "https://rental-property-a5c9efc9bb42.herokuapp.com/", // Replace with your frontend's URL
-  methods: ["GET", "POST", "PUT", "DELETE"], // HTTP methods allowed
-  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  origin: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000", // Use environment variable for flexibility
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
+
+// const corsOptions = {
+//   origin: "https://rental-property-a5c9efc9bb42.herokuapp.com/", // Replace with your frontend's URL
+//   methods: ["GET", "POST", "PUT", "DELETE"], // HTTP methods allowed
+//   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+// };
 app.use(cors(corsOptions));
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 // Create a PostgreSQL client
+// const client = new Client({
+//   host: "localhost",
+//   database: "rental_system",
+//   port: 5432,
+// });
+
 const client = new Client({
-  host: "localhost",
-  database: "rental_system",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL, // Use the DATABASE_URL environment variable
+  ssl: {
+    rejectUnauthorized: false, // Required for some hosted PostgreSQL services like Heroku
+  },
 });
 
 // Connect to the PostgreSQL database
