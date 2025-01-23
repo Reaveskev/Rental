@@ -456,6 +456,19 @@ app.post("/api/disputes", async (req, res) => {
   }
 });
 
+app.get("/test/users", async (req, res) => {
+  try {
+    // Query all users from the database
+    const result = await client.query("SELECT * FROM users");
+
+    // Return the users as JSON
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "An error occurred while fetching users" });
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
