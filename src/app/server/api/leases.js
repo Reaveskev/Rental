@@ -2,7 +2,7 @@ const client = require("../database");
 const cors = require("cors");
 app.use(
   cors({
-    origin: "https://rental-9s657lq89-reaveskevs-projects.vercel.app", // Replace with your frontend URL
+    origin: "https://rental-plum.vercel.app", // Replace with your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // If you're using cookies or authentication headers
   })

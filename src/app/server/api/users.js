@@ -3,14 +3,16 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(express.json());
+
 app.use(
   cors({
-    origin: "https://rental-9s657lq89-reaveskevs-projects.vercel.app", // Your frontend URL
+    origin: "https://rental-plum.vercel.app", // Your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // If you're using cookies or authentication headers
   })
 );
+
+app.use(express.json());
 
 // Handle preflight (OPTIONS) requests to allow CORS
 app.options("*", cors());
@@ -97,3 +99,8 @@ app.post("/users/login", async (req, res) => {
     res.status(500).send("Error logging in");
   }
 });
+
+// Export as serverless function
+module.exports = (req, res) => {
+  app(req, res);
+};
