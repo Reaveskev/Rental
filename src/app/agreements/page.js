@@ -24,7 +24,7 @@ const Agreements = () => {
       setError(null);
 
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get API base URL
+        const apiUrl = "https://rental-property-a5c9efc9bb42.herokuapp.com";
         const response = await fetch(
           `${apiUrl}/api/agreements?role=${user.role}&userId=${user.id}`
         );

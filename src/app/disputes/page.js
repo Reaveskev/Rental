@@ -20,7 +20,7 @@ const Disputes = () => {
   useEffect(() => {
     async function fetchDisputes() {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get API base URL
+        const apiUrl = "https://rental-property-a5c9efc9bb42.herokuapp.com";
         const response = await fetch(
           `${apiUrl}/api/disputes?user_id=${user.id}&role=${user.role}`,
           {

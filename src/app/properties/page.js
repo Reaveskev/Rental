@@ -18,6 +18,7 @@ const Properties = () => {
       setUserRole(user.role || sessionStorage.getItem("userRole"));
     }
 
+    const apiUrl = "https://rental-property-a5c9efc9bb42.herokuapp.com";
     // Fetch properties from the database based on User_id
     const fetchProperties = async () => {
       try {

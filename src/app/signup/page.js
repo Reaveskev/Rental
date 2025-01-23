@@ -28,6 +28,7 @@ const SignUp = () => {
       return;
     }
 
+    const apiUrl = "https://rental-property-a5c9efc9bb42.herokuapp.com";
     try {
       // Simulate the sign-up API call (replace with your actual API)
       const response = await fetch(`${apiUrl}/api/signup`, {

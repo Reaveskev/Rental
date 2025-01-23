@@ -19,13 +19,13 @@ const Payments = () => {
       Router.push("/login");
     }
   }, [user]);
+  const apiUrl = "https://rental-property-a5c9efc9bb42.herokuapp.com";
 
   useEffect(() => {
     // Fetch payments only if user is available
     if (user) {
       const fetchPayments = async () => {
         try {
-          const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get API base URL
           const response = await fetch(
             `${apiUrl}/api/payments?user_id=${user.id}&role=${user.role}`
           );
