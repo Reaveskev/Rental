@@ -22,7 +22,9 @@ const Login = () => {
     }
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get API base URL
+      // const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get API base URL
+
+      const apiUrl = "https://rental-property-a5c9efc9bb42.herokuapp.com";
       const response = await fetch(`${apiUrl}/users/login`, {
         // const response = await fetch("http://localhost:3000/users/login", {
         method: "POST",
