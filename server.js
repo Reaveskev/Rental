@@ -9,7 +9,10 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const corsOptions = {
-  origin: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000", // Use environment variable for flexibility
+  origin:
+    process.env.TEST_API ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:3000", // Use environment variable for flexibility
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
