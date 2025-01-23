@@ -6,7 +6,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://rental-plum.vercel.app", // Your frontend URL
+    origin: "https://rental-property-a5c9efc9bb42.herokuapp.com/", // Your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // If you're using cookies or authentication headers
   })
