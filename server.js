@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 // Initialize the Express app
 const app = express();
 const corsOptions = {
-  origin: "http://localhost:3001", // Replace with your frontend's URL
+  origin: "https://rental-plum.vercel.app", // Replace with your frontend's URL
   methods: ["GET", "POST", "PUT", "DELETE"], // HTTP methods allowed
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
 };
