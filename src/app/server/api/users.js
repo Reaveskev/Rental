@@ -101,6 +101,4 @@ app.post("/users/login", async (req, res) => {
 });
 
 // Export as serverless function
-module.exports = (req, res) => {
-  app(req, res);
-};
+module.exports = app;
