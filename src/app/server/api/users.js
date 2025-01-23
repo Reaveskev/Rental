@@ -12,6 +12,9 @@ app.use(
   })
 );
 
+// Handle preflight (OPTIONS) requests to allow CORS
+app.options("*", cors());
+
 app.post("/users", async (req, res) => {
   const { name, email, password, role } = req.body;
 
