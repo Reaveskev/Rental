@@ -12,6 +12,9 @@ const corsOptions = {
   origin: [
     process.env.TEST_API,
     process.env.NEXT_PUBLIC_API_URL,
+    "https://rental-plum.vercel.app",
+    "https://rental-reaveskevs-projects.vercel.app",
+
     "http://localhost:3000", // Use environment variable for flexibility
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
