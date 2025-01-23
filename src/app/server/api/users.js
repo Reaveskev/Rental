@@ -1,71 +1,73 @@
 const client = require("../database");
-
+const express = require("express");
 const cors = require("cors");
+
+const app = express();
+app.use(express.json());
 app.use(
   cors({
-    origin: "https://rental-9s657lq89-reaveskevs-projects.vercel.app", // Replace with your frontend URL
+    origin: "https://rental-9s657lq89-reaveskevs-projects.vercel.app", // Your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // If you're using cookies or authentication headers
   })
 );
-module.exports = (app) => {
-  app.post("/users", async (req, res) => {
-    const { name, email, password, role } = req.body;
 
-    try {
-      const result = await client.query(
-        "INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4) RETURNING *",
-        [name, email, password, role]
-      );
-      res.status(201).json(result.rows[0]);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Error adding user");
-    }
-  });
+app.post("/users", async (req, res) => {
+  const { name, email, password, role } = req.body;
 
-  app.get("/users/:id", async (req, res) => {
-    const { id } = req.params;
+  try {
+    const result = await client.query(
+      "INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4) RETURNING *",
+      [name, email, password, role]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error adding user");
+  }
+});
 
-    try {
-      const result = await client.query("SELECT * FROM users WHERE id = $1", [
-        id,
-      ]);
-      res.status(200).json(result.rows[0]);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Error fetching user");
-    }
-  });
+app.get("/users/:id", async (req, res) => {
+  const { id } = req.params;
 
-  app.put("/users/:id", async (req, res) => {
-    const { id } = req.params;
-    const { name, email, password, role } = req.body;
+  try {
+    const result = await client.query("SELECT * FROM users WHERE id = $1", [
+      id,
+    ]);
+    res.status(200).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error fetching user");
+  }
+});
 
-    try {
-      const result = await client.query(
-        "UPDATE users SET name = $1, email = $2, password = $3, role = $4 WHERE id = $5 RETURNING *",
-        [name, email, password, role, id]
-      );
-      res.status(200).json(result.rows[0]);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Error updating user");
-    }
-  });
+app.put("/users/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, email, password, role } = req.body;
 
-  app.delete("/users/:id", async (req, res) => {
-    const { id } = req.params;
+  try {
+    const result = await client.query(
+      "UPDATE users SET name = $1, email = $2, password = $3, role = $4 WHERE id = $5 RETURNING *",
+      [name, email, password, role, id]
+    );
+    res.status(200).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating user");
+  }
+});
 
-    try {
-      await client.query("DELETE FROM users WHERE id = $1", [id]);
-      res.status(200).send("User deleted successfully");
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Error deleting user");
-    }
-  });
-};
+app.delete("/users/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await client.query("DELETE FROM users WHERE id = $1", [id]);
+    res.status(200).send("User deleted successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error deleting user");
+  }
+});
 
 app.post("/users/login", async (req, res) => {
   const { email, password } = req.body;
